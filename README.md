@@ -271,10 +271,5 @@ docs/                   Everything above.
 
 ---
 
-<div align="center">
-<sub>
-**About this repository**
-
-AgenticQA was built as a private project for a company. This repository is the **public release of that work** — a single squashed commit representing the finished product, rather than the internal development history. The code, tests, benchmarks and documentation here are complete and self-contained; what is absent is the private commit history and the internal planning material, which are not ours to publish.
-</sub>
-</div>
+> **About this repository**  
+> AgenticQA was built as a private project for a company. This repository is the **public release of that work** — a single squashed commit representing the finished product, rather than the internal development history. The code, tests, benchmarks and documentation here are complete and self-contained; what is absent is the private commit history and the internal planning material, which are not ours to publish.
