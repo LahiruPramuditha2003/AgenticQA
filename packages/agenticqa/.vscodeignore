@@ -1,0 +1,52 @@
+# What does NOT ship in the .vsix.
+#
+# ⚠️ This file decides what strangers receive. Getting it wrong produces the single most likely failure
+# mode for this extension: it installs, activates, and then does nothing — because something the engine
+# needs at runtime was excluded. `npm run package` verifies the result; `npx @vscode/vsce ls` shows it.
+
+# ── secrets: never, under any pattern, from anywhere ──
+# vsce's own check caught `packages/orchestrator/.env` (a REAL API key) being pulled in through the
+# workspace dependency graph before `--no-dependencies` was added. One guard is not enough for a secret:
+# these rules, `--no-dependencies`, and an independent scan in scripts/build-engine.js all have to agree.
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/id_rsa*
+
+# The 32px render is a design check — it documents that the mark survives the size the marketplace
+# list actually uses. It belongs in the repo, not in every user's download.
+media/icon-32-preview.png
+
+# ── build inputs (the .vsix ships dist/, never sources) ──
+src/**
+test/**
+scripts/**
+out/**
+**/*.ts
+**/*.map
+**/tsconfig.json
+**/eslint.config.mjs
+esbuild.js
+.gitignore
+.yarnrc
+vsc-extension-quickstart.md
+.vscode/**
+.vscode-test/**
+**/.vscode-test.*
+
+# ── dependencies ──
+# Everything the engine imports is bundled into dist/orchestrator.js. The ONE exception is
+# `@playwright/mcp`, which the engine SPAWNS as a child process and therefore cannot be inlined — it is
+# staged into `dist/node_modules/` by scripts/build-engine.js, which is the first place Node looks when
+# resolving from `dist/orchestrator.js`.
+#
+# The extension's own node_modules is excluded wholesale. It holds only devDependencies, and packaging
+# it is what let a trial build reach `../../node_modules/agenticqa` and, through it, a real `.env`.
+node_modules/**
+
+# Trim the shipped packages: none of this is needed to run them, and playwright-core carries a lot of it.
+dist/node_modules/**/*.map
+dist/node_modules/**/test/**
+dist/node_modules/**/tests/**
+dist/node_modules/**/*.md

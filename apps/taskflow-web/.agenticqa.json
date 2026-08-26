@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://localhost:5174",
+  "testDir": "tests/generated",
+  "allowlistedDomains": [],
+  "webServer": {
+    "command": "npm run dev -- --port 5174",
+    "cwd": ".",
+    "timeoutMs": 60000,
+    "reuseExistingServer": true
+  }
+}

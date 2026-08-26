@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Extension",
+      "dependsOn": [
+        "Build Orchestrator",
+        "Compile Extension"
+      ],
+      "dependsOrder": "parallel"
+    },
+    {
+      "label": "Build Orchestrator",
+      "type": "npm",
+      "script": "build",
+      "path": "packages/orchestrator/",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Compile Extension",
+      "type": "npm",
+      "script": "compile",
+      "path": "packages/agenticqa/",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    }
+  ]
+}

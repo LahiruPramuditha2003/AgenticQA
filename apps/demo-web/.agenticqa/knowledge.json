@@ -1,0 +1,623 @@
+{
+  "name": "TechStore demo-web",
+  "curated": true,
+  "credentials": {
+    "customer": {
+      "email": "customer@example.com",
+      "password": "password123"
+    },
+    "admin": {
+      "email": "admin@techstore.com",
+      "password": "admin123"
+    },
+    "registration": {
+      "name": "Test User",
+      "email": "newuser@example.com",
+      "password": "TestPass123!",
+      "confirmPassword": "TestPass123!"
+    },
+    "shipping": {
+      "name": "Jane Smith",
+      "address": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10001",
+      "card": "4111111111111111",
+      "expiry": "12/28",
+      "cvv": "123"
+    }
+  },
+  "routes": {
+    "home": "/",
+    "products": "/products",
+    "productDetail": "/products/1",
+    "cart": "/cart",
+    "checkout": "/checkout",
+    "login": "/auth/login",
+    "register": "/auth/register",
+    "forgotPassword": "/auth/forgot-password",
+    "account": "/account",
+    "accountOrders": "/account/orders",
+    "accountProfile": "/account/profile",
+    "admin": "/admin"
+  },
+  "stableElements": {
+    "searchInput": "Search products...",
+    "categorySelect": "Category",
+    "sortSelect": "Sort"
+  },
+  "assertionAliases": [
+    {
+      "when": "after customer Sign In then navigate to /account",
+      "assert": "Total Orders"
+    },
+    {
+      "when": "after admin Sign In then navigate to /admin",
+      "assert": "Products"
+    },
+    {
+      "when": "on /cart with at least one item",
+      "assert": "Order Summary"
+    },
+    {
+      "when": "after searching for TERM on /products",
+      "assert": "All Products - \"TERM\""
+    },
+    {
+      "when": "checkout with an empty cart",
+      "assert": "Your cart is empty"
+    },
+    {
+      "when": "invalid login credentials",
+      "assert": "Invalid email or password"
+    },
+    {
+      "when": "after submitting forgot-password",
+      "assert": "Resend Email"
+    },
+    {
+      "when": "registration with mismatched passwords",
+      "assert": "Passwords do not match"
+    }
+  ],
+  "plannerGuidance": [
+    "Auth flow (CRITICAL):",
+    "- Login requires navigating to login page FIRST: click \"Login\" link, waitForLoad, THEN fill \"Email\" and \"Password\"",
+    "- NEVER fill \"Email\" or \"Password\" without first clicking \"Login\" — they only exist on /auth/login",
+    "- \"Welcome Back\" is the LOGIN PAGE HEADING — NEVER assert it after Sign In (user is redirected away)",
+    "- After customer Sign In: navigate to /account, then assert \"My Account\" or \"📊 Dashboard\" heading",
+    "- After admin Sign In: use goto with url=\"/admin\", then assert \"Dashboard\" or \"Products\" heading",
+    "- Registration page is at /auth/register — fields: \"Full Name\", \"Email\", \"Password\", \"Confirm Password\", checkbox \"I agree to the Terms of Service and Privacy Policy\", button \"Create Account\"",
+    "- After successful registration: navigate to /account, assert \"My Account\"",
+    "",
+    "Search/filter:",
+    "- Always navigate to /products FIRST before filling the search input",
+    "- Search input name is \"Search products...\" — fill it (no click needed, it filters live)",
+    "- After search for TERM: the page heading is \"All Products - \\\"TERM\\\"\" (include the search term in the assertion)",
+    "- No results state: assert text \"No products found\" — NOT \"All Products\"",
+    "- After selecting a category filter (option=\"Laptops\"): heading becomes \"Laptops\" — assert the category name, not \"All Products\"",
+    "- Categories: Laptops, Smartphones, Audio, Tablets, Wearables, TVs, Cameras, Gaming, Accessories",
+    "- Category/Sort are <select> elements on the Products page — use the \"select\" action with field=\"Category\" or field=\"Sort\", NEVER \"fill\"",
+    "- If the request says \"filter by X category\" / \"sort by Y\" (no mention of \"card\"): use select action, field=\"Category\", option=\"X\"",
+    "- ONLY use a \"click\" action on a category name (e.g. click \"Smartphones\") when the request explicitly says \"category card\" or \"click <category name>\" — this targets the home page card, not the filter",
+    "",
+    "Assertions:",
+    "- NEVER assert \"Free Shipping on Orders Over $100\" or any promotional banner text — these are marketing display elements, not page state",
+    "- NEVER assert \"Clear All\" — this is a filter reset button, not a state indicator",
+    "- For search results: assert \"All Products - \\\"TERM\\\"\" matching the actual heading format",
+    "",
+    "For search: extract the search term from the user request or default to \"laptop\""
+  ],
+  "goldenFlows": {
+    "login-invalid": {
+      "description": "Login with invalid credentials shows an error",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/auth/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "wronguser@example.com"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "wrongpassword123"
+        },
+        {
+          "action": "click",
+          "target": "Sign In"
+        },
+        {
+          "action": "waitFor",
+          "timeout": 1500
+        },
+        {
+          "action": "expectVisible",
+          "target": "Invalid email or password"
+        }
+      ]
+    },
+    "password-reset": {
+      "description": "Request a password reset and verify the post-submit confirmation",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/auth/forgot-password"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "customer@example.com"
+        },
+        {
+          "action": "click",
+          "target": "Send Reset Link"
+        },
+        {
+          "action": "waitFor",
+          "timeout": 1500
+        },
+        {
+          "action": "expectVisible",
+          "target": "Resend Email"
+        }
+      ]
+    },
+    "register-mismatch": {
+      "description": "Registration with mismatched passwords shows a validation error",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/auth/register"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Full Name",
+          "value": "Test User"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "newuser@example.com"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "TestPass123"
+        },
+        {
+          "action": "fill",
+          "field": "Confirm Password",
+          "value": "Mismatch456"
+        },
+        {
+          "action": "check",
+          "target": "I agree to the Terms of Service and Privacy Policy"
+        },
+        {
+          "action": "click",
+          "target": "Create Account"
+        },
+        {
+          "action": "waitFor",
+          "timeout": 1000
+        },
+        {
+          "action": "expectVisible",
+          "target": "Passwords do not match"
+        }
+      ]
+    },
+    "customer-login": {
+      "description": "Customer login and account dashboard verification",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/auth/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "customer@example.com"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "password123"
+        },
+        {
+          "action": "click",
+          "target": "Sign In"
+        },
+        {
+          "action": "waitFor",
+          "timeout": 1500
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "goto",
+          "url": "/account"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Total Orders"
+        }
+      ]
+    },
+    "admin-login": {
+      "description": "Admin login and admin panel verification",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/auth/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "admin@techstore.com"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "admin123"
+        },
+        {
+          "action": "click",
+          "target": "Sign In"
+        },
+        {
+          "action": "waitFor",
+          "timeout": 1500
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "goto",
+          "url": "/admin"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Products"
+        }
+      ]
+    },
+    "search": {
+      "description": "Search for a product",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/products"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Search products...",
+          "value": "laptop"
+        },
+        {
+          "action": "click",
+          "target": "Search"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "All Products - \"laptop\""
+        }
+      ]
+    },
+    "navigate": {
+      "description": "Navigate to products page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "click",
+          "target": "Products"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "All Products"
+        }
+      ]
+    },
+    "checkout-empty": {
+      "description": "View empty checkout page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "goto",
+          "url": "/checkout"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Your cart is empty"
+        }
+      ]
+    },
+    "home": {
+      "description": "Verify home page content",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Welcome to TechStore"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Products"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Login"
+        }
+      ]
+    },
+    "filter-category-select": {
+      "description": "Filter products by category using the Category dropdown",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/products"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "select",
+          "field": "Category",
+          "option": "Laptops"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Laptops"
+        }
+      ]
+    },
+    "category-card-click": {
+      "description": "Click a category card on the home page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "click",
+          "target": "Smartphones"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Smartphones"
+        }
+      ]
+    },
+    "register": {
+      "description": "User registration — create new account on register page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/auth/register"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Full Name",
+          "value": "Test User"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "newuser@example.com"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "TestPass123!"
+        },
+        {
+          "action": "fill",
+          "field": "Confirm Password",
+          "value": "TestPass123!"
+        },
+        {
+          "action": "check",
+          "target": "I agree to the Terms of Service and Privacy Policy"
+        },
+        {
+          "action": "click",
+          "target": "Create Account"
+        },
+        {
+          "action": "waitFor",
+          "timeout": 1500
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "goto",
+          "url": "/account"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Total Orders"
+        }
+      ]
+    },
+    "logout": {
+      "description": "User logout — sign out from account",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/auth/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "customer@example.com"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "password123"
+        },
+        {
+          "action": "click",
+          "target": "Sign In"
+        },
+        {
+          "action": "waitFor",
+          "timeout": 1500
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "goto",
+          "url": "/account"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "click",
+          "target": "Logout"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Login"
+        }
+      ]
+    },
+    "cart": {
+      "description": "Add product to shopping cart and view cart page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/products"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "click",
+          "target": "Add to Cart"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "goto",
+          "url": "/cart"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Order Summary"
+        }
+      ]
+    },
+    "product-detail": {
+      "description": "Browse products and view product detail page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/products"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "All Products"
+        },
+        {
+          "action": "click",
+          "target": "Add to Cart"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Add to Cart"
+        }
+      ]
+    }
+  }
+}

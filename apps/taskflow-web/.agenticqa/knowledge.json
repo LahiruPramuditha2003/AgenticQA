@@ -1,0 +1,496 @@
+{
+  "name": "taskflow-web",
+  "credentials": {
+    "admin": {
+      "email": "grace@taskflow.test",
+      "password": "Admin123!"
+    },
+    "customer": {
+      "email": "ada@taskflow.test",
+      "password": "Taskflow123!"
+    }
+  },
+  "routes": {
+    "home": "/",
+    "login": "/login",
+    "projects": "/projects",
+    "new": "/tasks/new",
+    "team": "/team",
+    "settings": "/settings",
+    "apollo": "/projects/apollo",
+    "beacon": "/projects/beacon",
+    "cobalt": "/projects/cobalt",
+    "delta": "/projects/delta",
+    "projectsList": "/projects",
+    "newTask": "/tasks/new",
+    "projectApollo": "/projects/apollo",
+    "projectBeacon": "/projects/beacon",
+    "projectCobalt": "/projects/cobalt",
+    "projectDelta": "/projects/delta"
+  },
+  "stableElements": {
+    "signOutButton": "Sign out",
+    "signInButton": "Sign in",
+    "emailInput": "Email",
+    "passwordInput": "Password",
+    "filterProjectsInput": "Filter projects",
+    "statusSelect": "Status",
+    "sortBySelect": "Sort by",
+    "taskTitleInput": "Task title",
+    "descriptionInput": "Description",
+    "projectInput": "Project",
+    "assigneeInput": "Assignee",
+    "priorityInput": "Priority",
+    "dueDateInput": "Due date",
+    "displayNameInput": "Display name",
+    "timezoneInput": "Timezone",
+    "createTaskButton": "Create task",
+    "inviteMemberButton": "Invite member",
+    "saveChangesButton": "Save changes",
+    "deleteWorkspaceButton": "Delete workspace",
+    "homeHeading": "Your Work",
+    "loginHeading": "Sign in to TaskFlow",
+    "projectsHeading": "Projects",
+    "createTaskHeading": "Create Task",
+    "teamHeading": "Team",
+    "settingsHeading": "Settings",
+    "apolloHeading": "Apollo Redesign",
+    "beaconHeading": "Beacon Analytics",
+    "cobaltHeading": "Cobalt Migration",
+    "deltaHeading": "Delta Onboarding"
+  },
+  "plannerGuidance": [
+    "Authentication: use the /login page, fill Email and Password, then click Sign in.",
+    "After login, the home page shows the heading 'Your Work'.",
+    "To search projects, navigate to /projects and use the 'Filter projects' input.",
+    "Primary navigation can be performed by directly navigating to known route paths.",
+    "Create a task by filling all required inputs on /tasks/new and clicking 'Create task'.",
+    "Invite teammates from the /team page using the 'Invite member' button.",
+    "Update profile settings on /settings page and persist changes with 'Save changes'.",
+    "Assertions should verify visible heading text unique to each page."
+  ],
+  "assertionAliases": [
+    {
+      "when": "after login",
+      "assert": "Your Work"
+    },
+    {
+      "when": "on projects page",
+      "assert": "Projects"
+    },
+    {
+      "when": "on task creation page",
+      "assert": "Create Task"
+    },
+    {
+      "when": "on team page",
+      "assert": "Team"
+    },
+    {
+      "when": "on settings page",
+      "assert": "Settings"
+    },
+    {
+      "when": "on project apollo page",
+      "assert": "Apollo Redesign"
+    },
+    {
+      "when": "on project beacon page",
+      "assert": "Beacon Analytics"
+    },
+    {
+      "when": "on project cobalt page",
+      "assert": "Cobalt Migration"
+    },
+    {
+      "when": "on project delta page",
+      "assert": "Delta Onboarding"
+    }
+  ],
+  "goldenFlows": {
+    "form-login": {
+      "description": "Sign in to TaskFlow — submit the form (/login)",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "test.user@example.com"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "Password123!"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Sign in"
+        },
+        {
+          "action": "click",
+          "target": "Sign in"
+        },
+        {
+          "action": "waitForLoad"
+        }
+      ],
+      "verified": true
+    },
+    "filter-projects": {
+      "description": "Projects — use the page controls (/projects)",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174/projects"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Filter projects",
+          "value": "Test value"
+        },
+        {
+          "action": "select",
+          "field": "Status",
+          "option": "Archived"
+        },
+        {
+          "action": "select",
+          "field": "Sort by",
+          "option": "Last updated"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Projects"
+        }
+      ],
+      "verified": true
+    },
+    "nav-projects": {
+      "description": "Open \"Projects\" from the navigation",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "click",
+          "target": "Projects"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Projects"
+        }
+      ],
+      "verified": true
+    },
+    "smoke-home": {
+      "description": "Your Work — page loads (/)",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Your Work"
+        }
+      ],
+      "verified": true
+    },
+    "signInWithAda": {
+      "description": "Sign in with standard user credentials and verify home page.",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "ada@taskflow.test"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "Taskflow123!"
+        },
+        {
+          "action": "click",
+          "target": "Sign in"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Your Work"
+        }
+      ],
+      "tags": [
+        "sign in",
+        "log in",
+        "authenticate"
+      ],
+      "verified": true
+    },
+    "form-new": {
+      "description": "Create Task — submit the form (/tasks/new)",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174/tasks/new"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Task title",
+          "value": "Test value"
+        },
+        {
+          "action": "fill",
+          "field": "Description",
+          "value": "Test value"
+        },
+        {
+          "action": "select",
+          "field": "Project",
+          "option": "Delta Onboarding"
+        },
+        {
+          "action": "select",
+          "field": "Assignee",
+          "option": "Katherine Johnson"
+        },
+        {
+          "action": "select",
+          "field": "Priority",
+          "option": "Urgent"
+        },
+        {
+          "action": "fill",
+          "field": "Due date",
+          "value": "2026-12-31"
+        },
+        {
+          "action": "check",
+          "target": "Bug"
+        },
+        {
+          "action": "check",
+          "target": "Feature"
+        },
+        {
+          "action": "check",
+          "target": "Documentation"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Create task"
+        },
+        {
+          "action": "click",
+          "target": "Create task"
+        },
+        {
+          "action": "waitForLoad"
+        }
+      ],
+      "verified": true
+    },
+    "nav-team": {
+      "description": "Open \"Team\" from the navigation",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "click",
+          "target": "Team"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Team"
+        }
+      ],
+      "verified": true
+    },
+    "smoke-login": {
+      "description": "Sign in to TaskFlow — page loads (/login)",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Sign in to TaskFlow"
+        }
+      ],
+      "verified": true
+    },
+    "searchProjects": {
+      "description": "Log in as admin, navigate to projects, apply a filter, and verify the projects page.",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/login"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Email",
+          "value": "grace@taskflow.test"
+        },
+        {
+          "action": "fill",
+          "field": "Password",
+          "value": "Admin123!"
+        },
+        {
+          "action": "click",
+          "target": "Sign in"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Your Work"
+        },
+        {
+          "action": "goto",
+          "url": "/projects"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Filter projects",
+          "value": "apollo"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Projects"
+        }
+      ],
+      "tags": [
+        "search projects",
+        "filter projects",
+        "find project"
+      ],
+      "verified": true
+    },
+    "form-settings": {
+      "description": "Settings — submit the form (/settings)",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174/settings"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "fill",
+          "field": "Display name",
+          "value": "Test User"
+        },
+        {
+          "action": "select",
+          "field": "Timezone",
+          "option": "Asia/Colombo"
+        },
+        {
+          "action": "check",
+          "target": "Email notifications"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Save changes"
+        },
+        {
+          "action": "click",
+          "target": "Save changes"
+        },
+        {
+          "action": "waitForLoad"
+        }
+      ],
+      "verified": true
+    },
+    "nav-settings": {
+      "description": "Open \"Settings\" from the navigation",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "click",
+          "target": "Settings"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Settings"
+        }
+      ],
+      "verified": true
+    },
+    "smoke-projects": {
+      "description": "Projects — page loads (/projects)",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "http://localhost:5174/projects"
+        },
+        {
+          "action": "waitForLoad"
+        },
+        {
+          "action": "expectVisible",
+          "target": "Projects"
+        }
+      ],
+      "verified": true
+    }
+  }
+}

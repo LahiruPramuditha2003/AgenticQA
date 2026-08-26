@@ -1,0 +1,56 @@
+<!--
+  AgenticQA marketplace mark (R2.5).
+
+  Source of truth for media/icon.png — regenerate with `node scripts/render-icon.js`.
+
+  Design constraints, and why:
+   • It carries its own background. Marketplace pages do not honour the editor theme, and the same file
+     appears on a white gallery card and in a dark sidebar list; a transparent mark would vanish on one.
+   • No text. At the 32px the marketplace list actually renders, lettering is mud.
+   • Not a beaker, flask or test tube. Every testing extension is a beaker; it identifies the category,
+     not the product.
+   • One idea only, readable as a silhouette: a checkmark drawn as an agent pipeline — three nodes
+     handing off along the stroke, ending in a pass. That is literally what AgenticQA does.
+   • Node radii are tuned AGAINST the stroke weight, not chosen freely: at 32px the first pass used
+     r=17 discs on a 26px stroke, so the nodes bulged past the check and the silhouette read as a
+     zigzag rather than a tick. Discs now sit just inside the stroke, and only the terminal node
+     (the "pass") is allowed to break it.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4F46E5"/>
+      <stop offset="0.55" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#9333EA"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E9D5FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded-square plate. 22% radius reads as an app icon at every size VS Code renders. -->
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="url(#bg)"/>
+
+  <!-- Soft top-light, so the mark does not look flat on a white gallery card. -->
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="#FFFFFF" opacity="0.07"/>
+
+  <!-- The checkmark: one continuous stroke, generously weighted so it survives downscaling to 32px. -->
+  <path d="M 62 132 L 108 178 L 194 84"
+        fill="none"
+        stroke="url(#stroke)"
+        stroke-width="30"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Three agent nodes along the path: start, hand-off, result. Filled discs with a coloured core so
+       they stay visible where they overlap the white stroke. -->
+  <g>
+    <circle cx="62"  cy="132" r="16" fill="#FFFFFF"/>
+    <circle cx="62"  cy="132" r="7.5" fill="#5B21B6"/>
+    <circle cx="108" cy="178" r="16" fill="#FFFFFF"/>
+    <circle cx="108" cy="178" r="7.5" fill="#6D28D9"/>
+    <circle cx="194" cy="84"  r="22" fill="#FFFFFF"/>
+    <circle cx="194" cy="84"  r="10.5" fill="#7E22CE"/>
+  </g>
+</svg>

@@ -1,0 +1,321 @@
+{
+  "name": "agenticqa",
+  "displayName": "AgenticQA",
+  "description": "Describe a test in plain English. AgenticQA plans it, writes a Playwright spec, runs it, and self-heals broken locators when your UI changes.",
+  "version": "1.0.0",
+  "publisher": "LahiruPramuditha2003",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#4F46E5",
+    "theme": "dark"
+  },
+  "categories": [
+    "Testing",
+    "AI",
+    "Machine Learning",
+    "Other"
+  ],
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "test automation",
+    "ai",
+    "agent",
+    "test generation",
+    "self-healing",
+    "qa",
+    "end to end"
+  ],
+  "pricing": "Free",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LahiruPramuditha2003/AgenticQA.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LahiruPramuditha2003/AgenticQA/issues"
+  },
+  "homepage": "https://github.com/LahiruPramuditha2003/AgenticQA#readme",
+  "qna": "marketplace",
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agenticqa.newRequest",
+        "title": "AgenticQA: New Request"
+      },
+      {
+        "command": "agenticqa.runOnly",
+        "title": "AgenticQA: Run Existing Tests",
+        "icon": "$(play)"
+      },
+      {
+        "command": "agenticqa.doctor",
+        "title": "AgenticQA: Doctor / Setup Check",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "agenticqa.clearRuns",
+        "title": "AgenticQA: Clear Run History",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "agenticqa.cleanTests",
+        "title": "AgenticQA: Clean Generated Tests",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "agenticqa.openHtmlReport",
+        "title": "AgenticQA: Open HTML Report (Raw)",
+        "icon": "$(code)"
+      },
+      {
+        "command": "agenticqa.previewHtmlReport",
+        "title": "AgenticQA: Open Report",
+        "icon": "$(preview)"
+      },
+      {
+        "command": "agenticqa.exportReport",
+        "title": "AgenticQA: Export Report (PDF)",
+        "icon": "$(desktop-download)"
+      },
+      {
+        "command": "agenticqa.viewTestFile",
+        "title": "AgenticQA: View Spec File",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "agenticqa.rerunTest",
+        "title": "AgenticQA: Re-run This Test",
+        "icon": "$(debug-rerun)"
+      },
+      {
+        "command": "agenticqa.newTestAllBrowsers",
+        "title": "AgenticQA: New Test (All Browsers)",
+        "icon": "$(browser)"
+      },
+      {
+        "command": "agenticqa.exploreApp",
+        "title": "AgenticQA: Explore App",
+        "icon": "$(compass)"
+      },
+      {
+        "command": "agenticqa.generatePack",
+        "title": "AgenticQA: Generate Knowledge Pack",
+        "icon": "$(book)"
+      },
+      {
+        "command": "agenticqa.settings",
+        "title": "AgenticQA: Settings",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "agenticqa.setApiKey",
+        "title": "AgenticQA: Set API Key",
+        "icon": "$(key)"
+      },
+      {
+        "command": "agenticqa.clearApiKey",
+        "title": "AgenticQA: Clear API Key",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "agenticqa.resetDatabase",
+        "title": "AgenticQA: Reset Database",
+        "icon": "$(database)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agenticqa-sidebar",
+          "title": "AgenticQA",
+          "icon": "$(beaker)"
+        }
+      ]
+    },
+    "views": {
+      "agenticqa-sidebar": [
+        {
+          "id": "agenticqa.runsView",
+          "name": "Test Runs"
+        },
+        {
+          "type": "webview",
+          "id": "agenticqa.chatView",
+          "name": "New Request"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "agenticqa.exploreApp",
+          "when": "view == agenticqa.runsView",
+          "group": "navigation@0"
+        },
+        {
+          "command": "agenticqa.generatePack",
+          "when": "view == agenticqa.runsView",
+          "group": "navigation@6"
+        },
+        {
+          "command": "agenticqa.runOnly",
+          "when": "view == agenticqa.runsView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "agenticqa.doctor",
+          "when": "view == agenticqa.runsView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "agenticqa.clearRuns",
+          "when": "view == agenticqa.runsView",
+          "group": "navigation@3"
+        },
+        {
+          "command": "agenticqa.cleanTests",
+          "when": "view == agenticqa.runsView",
+          "group": "navigation@4"
+        },
+        {
+          "command": "agenticqa.settings",
+          "when": "view == agenticqa.runsView",
+          "group": "navigation@5"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "agenticqa.previewHtmlReport",
+          "when": "viewItem == run",
+          "group": "inline@1"
+        },
+        {
+          "command": "agenticqa.exportReport",
+          "when": "viewItem == run",
+          "group": "inline@2"
+        },
+        {
+          "command": "agenticqa.rerunTest",
+          "when": "viewItem == run",
+          "group": "inline@3"
+        },
+        {
+          "command": "agenticqa.viewTestFile",
+          "when": "viewItem == run",
+          "group": "inline@4"
+        },
+        {
+          "command": "agenticqa.openHtmlReport",
+          "when": "viewItem == run",
+          "group": "report@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AgenticQA",
+      "properties": {
+        "agenticqa.api.baseUrl": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "OpenAI-compatible API base URL. Leave blank to use the default `https://openrouter.ai/api/v1`. Set your own to point at any OpenRouter-compatible endpoint."
+        },
+        "agenticqa.api.globalModel": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Force a single model for **every** agent role (the `OPENAI_MODEL` knob). Leave blank to use the per-agent models below. Free models end in `:free`."
+        },
+        "agenticqa.models.planner": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for the **planner** (test-plan generation). Blank → default `nvidia/nemotron-3-super-120b-a12b:free`."
+        },
+        "agenticqa.models.domainqa": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for **Domain Q&A** (RAG answers). Blank → default `google/gemma-4-31b-it:free`."
+        },
+        "agenticqa.models.selfheal": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for **self-heal** locator reranking. Blank → default `openai/gpt-oss-20b:free`."
+        },
+        "agenticqa.models.reporter": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for the **reporter** failure analysis. Blank → default `openai/gpt-oss-20b:free`."
+        },
+        "agenticqa.models.receptionist": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for the **receptionist** intent classifier (LLM fallback). Blank → default `nvidia/nemotron-nano-9b-v2:free`."
+        },
+        "agenticqa.models.casual": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for **casual** conversational replies. Blank → default `nvidia/nemotron-nano-9b-v2:free`."
+        },
+        "agenticqa.models.explorer": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for the **explorer** flow-ranking judge. Blank → default `openai/gpt-oss-20b:free`."
+        },
+        "agenticqa.models.packgen": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Model for the **knowledge-pack generator** (auto-pack synthesis). Blank → default `nvidia/nemotron-3-super-120b-a12b:free`. A larger free model is recommended here."
+        },
+        "agenticqa.embedModel": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Embedding model for RAG + vector self-heal (`OPENAI_EMBED_MODEL`). Blank → the configured default. Note: with Postgres on, the DB fixes the vector dimension — changing this is always safe with the DB **off**."
+        },
+        "agenticqa.enforceFreeModels": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Block non-free models when **no API key is configured**. With a key set, non-free models are allowed with a warning — the cost is yours to accept. AgenticQA ships no API key of its own."
+        },
+        "agenticqa.enginePath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Absolute path to an AgenticQA engine entry point (`main.js` / `orchestrator.js`). **Leave blank** unless you are developing AgenticQA itself — when set, it overrides the engine bundled with the extension. Use `AgenticQA: Doctor / Setup Check` to confirm which engine is in use."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js && node scripts/build-engine.js --skip-deps",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production && node scripts/build-engine.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "npm run compile-tests && node --test test/*.test.js",
+    "test:vscode": "vscode-test",
+    "build:engine": "node scripts/build-engine.js",
+    "vsix": "npm run package && npx @vscode/vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/vscode": "1.90.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.54.0",
+    "eslint": "^9.39.2",
+    "esbuild": "^0.27.2",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}

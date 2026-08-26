@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/agenticqa",
+        "${workspaceFolder}/apps/demo-web"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/packages/agenticqa/dist/**/*.js"
+      ],
+      "preLaunchTask": "Build Extension"
+    }
+  ]
+}

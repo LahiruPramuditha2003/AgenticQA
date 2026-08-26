@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Offline by design: no API key, no Docker, no browsers. Everything here must pass without them —
+# which is also the guarantee that AgenticQA itself degrades gracefully when a user has none of them.
+jobs:
+  test:
+    name: Build & test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build engine
+        run: npm run build --workspace @agenticqa/orchestrator
+
+      - name: Engine tests
+        run: npm test --workspace @agenticqa/orchestrator
+
+      - name: Extension build + tests
+        run: |
+          npm run compile --workspace agenticqa
+          npm test --workspace agenticqa
+
+      - name: Demo app builds
+        run: |
+          npm run build --workspace demo-web
+          npm run build --workspace taskflow-web
+
+      # Retrieval quality is a number, not a vibe. These are offline and take seconds, so a regression
+      # in flow retrieval fails the build rather than surfacing in a live run weeks later.
+      - name: Retrieval evals
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          npm run eval:flowindex --workspace @agenticqa/orchestrator
+          npm run eval:generatedpack --workspace @agenticqa/orchestrator
+
+  package:
+    name: Package .vsix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      # `npm run vsix` fails unless the packaged engine starts, answers PING, resolves its externals
+      # from the bundle's own location, and ships its prompts. Each of those fails silently otherwise:
+      # the extension would install, activate, and do nothing.
+      - name: Build and package
+        run: npm run vsix --workspace agenticqa
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agenticqa-vsix
+          path: packages/agenticqa/*.vsix

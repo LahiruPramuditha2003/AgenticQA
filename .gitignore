@@ -1,0 +1,107 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  AgenticQA — what stays out of the repository
+#
+#  Rule of thumb: a file belongs here if it is generated, machine-specific,
+#  secret, or written for an audience that is not a contributor.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Secrets ──────────────────────────────────────────────────────────────────
+# .env.example IS committed and must only ever hold placeholders.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+
+# ── Dependencies & build output ──────────────────────────────────────────────
+node_modules/
+dist/
+out/
+build/
+*.tsbuildinfo
+*.vsix
+vite.config.ts.timestamp-*
+.npm
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Editor / OS ──────────────────────────────────────────────────────────────
+# .vscode/launch.json and tasks.json ARE committed: they are what makes F5
+# ("Run Extension") work, which is the first instruction in CONTRIBUTING.md.
+# Everything else under .vscode/ is personal.
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── AI-agent tooling ─────────────────────────────────────────────────────────
+# Instructions written for coding agents, not for people. The technical content
+# they carried lives in docs/ARCHITECTURE.md and CONTRIBUTING.md instead.
+.claude/
+.qwen/
+CLAUDE.md
+AGENTS.md
+
+# ── Internal planning & coursework ───────────────────────────────────────────
+IMPLEMENTATION-PLAN.md
+doc/
+finalrefdoc/
+final ref doc/
+
+# ── Test & run artifacts ─────────────────────────────────────────────────────
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+agenticqa-reports/
+**/agenticqa-reports/
+debug-screenshot.png
+*.zip
+
+# Generated specs are ephemeral by design — AgenticQA rewrites them on demand.
+tests/generated/
+apps/**/tests/generated/
+packages/**/tests/generated/
+
+# Self-heal capture temp artifacts (normally auto-deleted)
+**/__agenticqa_heal_*
+
+# ── Knowledge-pack churn ─────────────────────────────────────────────────────
+# Packs themselves ARE committed; their timestamped backups and evidence dumps
+# are not.
+**/.agenticqa/knowledge.backup-*.json
+**/.agenticqa/*.evidence
+**/.agenticqa/knowledge.generated-*.json
+
+# ── Benchmark output ─────────────────────────────────────────────────────────
+batch-results-*.json
+batch-template-run-results.json
+batch-artifacts/
+packages/**/batch-results-*.json
+packages/**/batch-artifacts/
+
+# ── Caches ───────────────────────────────────────────────────────────────────
+packages/**/.cache/
+.playwright-mcp/
+
+# ── Scratch ──────────────────────────────────────────────────────────────────
+tmp/
+temp_headings.*
+rerun*.txt
+lastoutput.txt
+lastprompt.txt
+TerminalOutput.md
+*.log
+*.local
+*.volume

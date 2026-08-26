@@ -1,0 +1,43 @@
+{
+  "name": "@agenticqa/orchestrator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AgenticQA engine — the Node AI-agent pipeline the VS Code extension drives.",
+  "license": "MIT",
+  "main": "dist/main.js",
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p . && node scripts/copyPrompts.js",
+    "start": "node dist/main.js",
+    "pretest": "npm run build",
+    "test": "node --test \"test/*.test.js\"",
+    "test:nobuild": "node --test \"test/*.test.js\"",
+    "batch:templates": "node scripts/batchRunTemplates.js",
+    "eval:rag": "node scripts/evalRag.js",
+    "eval:rag:verbose": "node scripts/evalRag.js --verbose",
+    "eval:rag:json": "node scripts/evalRag.js --json",
+    "eval:planner": "node scripts/evalPlanner.js",
+    "eval:planner:verbose": "node scripts/evalPlanner.js --verbose",
+    "eval:domainqa": "node scripts/evalDomainQa.js",
+    "eval:domainqa:json": "node scripts/evalDomainQa.js --json",
+    "eval:flowindex": "node scripts/evalFlowIndex.js",
+    "generate:pack": "node scripts/generatePack.js",
+    "probe:models": "node scripts/probeModels.js",
+    "eval:generatedpack": "node scripts/evalGeneratedPack.js",
+    "eval:generatedpack:tags": "node scripts/evalGeneratedPack.js --tags --verbose",
+    "eval:flowindex:verbose": "node scripts/evalFlowIndex.js --verbose",
+    "eval:flowindex:compare": "node scripts/evalFlowIndex.js --compare"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "@types/pg": "^8.16.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@playwright/mcp": "^0.0.68",
+    "dotenv": "^17.3.1",
+    "openai": "^6.42.0",
+    "pg": "^8.18.0",
+    "zod": "^4.3.6"
+  }
+}

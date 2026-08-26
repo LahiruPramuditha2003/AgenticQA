@@ -1,0 +1,60 @@
+name: Bug report
+description: Something doesn't work
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing: run **AgenticQA: Doctor / Setup Check** and check
+        [docs/TROUBLESHOOTING.md](../../blob/main/docs/TROUBLESHOOTING.md) — it covers the common cases.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you do, what did you expect, what did you get?
+    validations: { required: true }
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Output panel
+      description: "View → Output → AgenticQA. This is the single most useful thing you can include."
+      render: shell
+    validations: { required: true }
+
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Doctor report
+      description: Output of **AgenticQA: Doctor / Setup Check**.
+      render: shell
+    validations: { required: true }
+
+  - type: textarea
+    id: spec
+    attributes:
+      label: Generated spec
+      description: If a spec was produced, paste it.
+      render: typescript
+
+  - type: input
+    id: version
+    attributes:
+      label: AgenticQA version
+      placeholder: "1.0.0"
+    validations: { required: true }
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: OS
+      options: [Windows, macOS, Linux]
+    validations: { required: true }
+
+  - type: dropdown
+    id: db
+    attributes:
+      label: Database
+      options: ["Not running (default)", "Postgres via docker compose", "Other Postgres"]
+    validations: { required: true }

@@ -1,0 +1,28 @@
+# Normalise line endings so a checkout on Windows, macOS and Linux produces identical files.
+# Without this, Windows contributors commit CRLF, everyone else sees whole-file diffs, and review
+# becomes impossible. Text is stored LF in the repository and checked out native.
+* text=auto
+
+# Files that MUST stay LF regardless of platform: shell scripts break with CRLF, and these formats
+# are consumed by tools that do not tolerate it.
+*.sh        text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+.gitattributes text eol=lf
+.gitignore  text eol=lf
+
+# Windows-only scripts must stay CRLF.
+*.ps1       text eol=crlf
+*.cmd       text eol=crlf
+*.bat       text eol=crlf
+
+# Binary — never diffed, never normalised.
+*.png       binary
+*.jpg       binary
+*.ico       binary
+*.vsix      binary
+*.pdf       binary
+
+# Generated: collapsed in pull-request diffs so a lockfile bump does not bury a real change.
+package-lock.json           linguist-generated=true
+**/test/fixtures/*.json     linguist-generated=true

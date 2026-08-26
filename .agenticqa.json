@@ -1,0 +1,13 @@
+{
+  "_comment": "Opening the MONOREPO ROOT as the workspace targets apps/demo-web. Defect D10: this file used to omit knowledgePack and point testDir at <root>/tests/generated, so a hand-run from the root silently ran demo-web with NO pack and wrote specs to a directory nothing else reads. The benchmark never noticed because it passes workspacePath=apps/demo-web. Paths below are relative to this file's directory.",
+  "baseUrl": "http://localhost:5173",
+  "testDir": "apps/demo-web/tests/generated",
+  "knowledgePack": "apps/demo-web/.agenticqa/knowledge.json",
+  "allowlistedDomains": [],
+  "webServer": {
+    "command": "npm run dev",
+    "cwd": "apps/demo-web",
+    "timeoutMs": 60000,
+    "reuseExistingServer": true
+  }
+}

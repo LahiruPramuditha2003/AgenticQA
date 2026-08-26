@@ -1,0 +1,16 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: agenticqa-db
+    environment:
+      POSTGRES_USER: agenticqa
+      POSTGRES_PASSWORD: agenticqa
+      POSTGRES_DB: agenticqa
+    ports:
+      - "5432:5432"
+    volumes:
+      - agenticqa_pg:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  agenticqa_pg:

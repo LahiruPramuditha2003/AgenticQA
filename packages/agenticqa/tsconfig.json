@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"module": "Node16",
+		"target": "ES2022",
+		"lib": [
+			"ES2022"
+		],
+		"sourceMap": true,
+		/* rootDir is deliberately the monorepo root, not `src`. This project type-checks with
+		   `tsc --noEmit` (esbuild does the bundling), so rootDir constrains nothing about output — but
+		   with rootDir=src it forbids importing the shared model catalog from packages/orchestrator,
+		   which is the single source of truth for free model IDs. esbuild inlines that import, so no
+		   runtime dependency on the orchestrator is created. */
+		"rootDir": "../..",
+		"strict": true,   /* enable all strict type-checking options */
+		/* Additional Checks */
+		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
+		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
+		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
+		"types": ["node", "vscode"],
+		"skipLibCheck": true,
+	},
+	"exclude": ["src/test/**", "out", "dist", "node_modules"]
+}

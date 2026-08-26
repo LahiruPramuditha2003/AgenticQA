@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "auth-login",
+    "intent": "auth",
+    "title": "Login with valid credentials",
+    "keywords": ["login", "sign in", "signin", "valid", "credentials", "authenticate", "logged in", "email", "password"],
+    "description": "Test successful user login. Navigate to the login page, fill email and password with valid credentials, submit the form, and verify the user reaches an authenticated state.",
+    "stepGuidance": [
+      "Navigate to the start URL (homepage)",
+      "Click the Login or Sign In navigation link to reach the login page",
+      "Fill the email or username field with testuser@example.com",
+      "Fill the password field with TestPass123!",
+      "Click the Sign In or Login submit button",
+      "Wait for page to load after form submission",
+      "Assert that a heading or element confirming authenticated state is visible (My Account, Order History, or dashboard heading)"
+    ],
+    "assertions": [
+      "A logged-in state heading or dashboard should be visible after submission",
+      "The login form should no longer be present",
+      "User-specific navigation (My Account, Orders, Logout) should appear"
+    ],
+    "notes": "Always use testuser@example.com and TestPass123! as test credentials. Assert on the heading of the post-login page."
+  },
+  {
+    "id": "auth-login-invalid",
+    "intent": "auth",
+    "title": "Login with invalid credentials",
+    "keywords": ["login", "invalid", "wrong", "incorrect", "error", "failed", "bad credentials", "unauthorized"],
+    "description": "Test login rejection with wrong credentials. Fill in an incorrect email or password and verify an error message is shown instead of granting access.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Login navigation link",
+      "Fill the email field with wrong@example.com",
+      "Fill the password field with WrongPass999",
+      "Click the Sign In button",
+      "Wait for page to load",
+      "Assert that an error message is visible indicating login failure"
+    ],
+    "assertions": [
+      "An error or alert message should be visible indicating login failure",
+      "The user should remain on the login page (not redirected to dashboard)"
+    ],
+    "notes": "For invalid credential tests, assert on error messages, not on successful landing pages."
+  },
+  {
+    "id": "auth-register",
+    "intent": "auth",
+    "title": "New user registration",
+    "keywords": ["register", "sign up", "signup", "create account", "new user", "registration", "join"],
+    "description": "Test creating a new user account. Navigate to the registration page, fill all required fields with valid data, submit, and verify the account was created.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Sign Up or Register link",
+      "Fill the name or full name field with Test User",
+      "Fill the email field with newuser@example.com",
+      "Fill the password field with TestPass123!",
+      "Fill the confirm password field with TestPass123! if present",
+      "Click the Register or Create Account button",
+      "Wait for page to load",
+      "Assert a confirmation heading is visible (Welcome, Account Created, or dashboard)"
+    ],
+    "assertions": [
+      "A success message or welcome heading should be visible after registration",
+      "The user should be redirected away from the registration form"
+    ],
+    "notes": "Use unique-looking email values like newuser@example.com. Confirm password fields need the same value as password."
+  },
+  {
+    "id": "auth-register-validation",
+    "intent": "auth",
+    "title": "Registration form validation",
+    "keywords": ["register", "validation", "error", "required", "duplicate", "existing email", "password mismatch", "confirm password"],
+    "description": "Test registration form validation. Submit the form with missing or mismatched fields and verify appropriate validation errors appear.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Sign Up or Register link",
+      "Leave required fields empty or fill password with TestPass123! and confirm password with DifferentPass456",
+      "Click the Register button without filling all fields",
+      "Wait for validation response",
+      "Assert that validation error messages are visible"
+    ],
+    "assertions": [
+      "Validation error messages should appear for empty or invalid fields",
+      "The form should not be submitted successfully with invalid data"
+    ],
+    "notes": "Focus assertions on error messages and the form remaining visible after failed submission."
+  },
+  {
+    "id": "auth-logout",
+    "intent": "auth",
+    "title": "User logout flow",
+    "keywords": ["logout", "log out", "sign out", "signout", "end session", "logged out"],
+    "description": "Test the logout flow. After navigating to the app, click the logout button and verify the user is returned to an unauthenticated state.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Login link to log in first",
+      "Fill credentials and sign in",
+      "After login, click the Logout button or link",
+      "Wait for page to load",
+      "Assert that the login page or heading confirming logged-out state is visible"
+    ],
+    "assertions": [
+      "Login or Sign In option should reappear after logout",
+      "Account-specific navigation (My Account, Orders) should be gone"
+    ],
+    "notes": "The Logout button may be in a dropdown menu. After logout, assert visibility of the Login link or heading."
+  },
+  {
+    "id": "auth-password-reset",
+    "intent": "auth",
+    "title": "Forgot password / password reset request",
+    "keywords": ["password", "forgot", "reset", "recovery", "forgot password", "change password", "reset link"],
+    "description": "Test the forgot password flow. Navigate to the login page, click the forgot password link, enter an email address, and verify a confirmation message is shown.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Login link",
+      "Click the Forgot Password? link on the login page",
+      "Fill the email field with testuser@example.com",
+      "Click the submit or send button",
+      "Wait for page to load",
+      "Assert that a confirmation message is visible"
+    ],
+    "assertions": [
+      "A confirmation message about the password reset email should be visible",
+      "No error messages should appear for a valid email"
+    ],
+    "notes": "The Forgot Password link is usually on the login page. Assertions should target the success/confirmation message."
+  },
+  {
+    "id": "auth-session",
+    "intent": "auth",
+    "title": "Session persistence and timeout",
+    "keywords": ["session", "timeout", "expire", "persist", "remember me", "stay logged in", "session timeout"],
+    "description": "Test session behavior. Verify that the user remains authenticated across navigation or gets redirected to login when the session expires.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with testuser@example.com and TestPass123!",
+      "After login, navigate to My Account or Order History",
+      "Assert the user is still authenticated on the new page",
+      "Assert that account-specific content is visible"
+    ],
+    "assertions": [
+      "User should remain authenticated when navigating between pages",
+      "Account page headings (My Account, Order History) should be visible"
+    ],
+    "notes": "For session timeout tests, assert that unauthenticated navigation redirects to the login page."
+  },
+  {
+    "id": "auth-change-password",
+    "intent": "auth",
+    "title": "Change password from account settings",
+    "keywords": ["change password", "update password", "new password", "current password", "account settings", "security"],
+    "description": "Test changing the account password from within the user account settings page. Enter the current password, set a new one, and verify the change is accepted.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with testuser@example.com and TestPass123!",
+      "Navigate to My Account or Account Settings",
+      "Find the change password section",
+      "Fill the current password field with TestPass123!",
+      "Fill the new password field with NewPass456!",
+      "Fill the confirm new password field with NewPass456!",
+      "Click Save or Update Password",
+      "Assert that My Account heading is still visible (update succeeded)"
+    ],
+    "assertions": [
+      "A success message or the My Account heading should be visible after password change",
+      "No error messages should appear for valid matching passwords"
+    ],
+    "notes": "Requires being logged in first. Assert on success message or page heading after submission."
+  },
+  {
+    "id": "auth-profile-update",
+    "intent": "auth",
+    "title": "Update user profile information",
+    "keywords": ["profile", "update profile", "edit profile", "personal info", "account info", "name", "email update"],
+    "description": "Test updating user profile information such as name or email from the account settings page.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with testuser@example.com and TestPass123!",
+      "Click on My Account or Profile link",
+      "Fill the Full Name or name field with Updated User",
+      "Click Save Changes or Update Profile",
+      "Wait for page to load",
+      "Assert that My Account heading is visible (update succeeded)"
+    ],
+    "assertions": [
+      "My Account heading should remain visible after updating",
+      "A success or confirmation message may appear"
+    ],
+    "notes": "Profile update requires authentication first. Assert on the page heading or success confirmation after save."
+  },
+  {
+    "id": "search-basic",
+    "intent": "search",
+    "title": "Basic product search",
+    "keywords": ["search", "find", "query", "keyword", "search products", "look for", "locate"],
+    "description": "Test the product search functionality. Enter a search term in the search input, submit, and verify search results are shown.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Fill the search input field with a relevant search term (e.g., laptop)",
+      "Click the Search button or press submit",
+      "Wait for the results page to load",
+      "Assert that a results heading or product listing is visible"
+    ],
+    "assertions": [
+      "A results heading (All Products, Search Results) should be visible",
+      "Product cards or items matching the search term should appear"
+    ],
+    "notes": "Extract the search term from the user request. If none specified, use laptop as the default search term."
+  },
+  {
+    "id": "search-no-results",
+    "intent": "search",
+    "title": "Search with no results",
+    "keywords": ["search", "no results", "empty results", "not found", "zero results", "no products"],
+    "description": "Test search behavior when no products match the query. Search for a term that returns no results and verify the empty state is handled correctly.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Fill the search input with a term that returns no results (e.g., xyznonexistentproduct123)",
+      "Click the Search button",
+      "Wait for page to load",
+      "Assert that a no-results message or empty state indicator is visible"
+    ],
+    "assertions": [
+      "An empty state message (No products found, No results) should be visible",
+      "No product cards should appear in the results"
+    ],
+    "notes": "Use obviously non-matching search terms. Assert on the empty state message text."
+  },
+  {
+    "id": "search-sort",
+    "intent": "search",
+    "title": "Search then sort results",
+    "keywords": ["search", "sort", "order results", "search sort", "filter results", "search and sort"],
+    "description": "Test searching for products and then sorting the results. Enter a search term, get results, then apply a sort order.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Fill the search input with laptop",
+      "Click the Search button",
+      "Wait for results to load",
+      "Select an option from the Sort by dropdown",
+      "Wait for results to reorder",
+      "Assert that the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should remain visible after sorting",
+      "Products should be reordered according to the sort selection"
+    ],
+    "notes": "Search first, then apply sorting. Assert on the results heading remaining visible."
+  },
+  {
+    "id": "filter-category",
+    "intent": "filter",
+    "title": "Filter products by category",
+    "keywords": ["filter", "category", "type", "laptops", "smartphones", "tablets", "refine", "browse category"],
+    "description": "Test filtering products by category. Navigate to the products page, select or click a category filter, and verify only products from that category are shown.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products navigation link to go to the products page",
+      "Click a category link or select from the category filter (e.g., Laptops, Smartphones)",
+      "Wait for the filtered results to load",
+      "Assert that the products heading or category heading is visible"
+    ],
+    "assertions": [
+      "A category-specific heading or filtered products heading should be visible",
+      "Products shown should match the selected category"
+    ],
+    "notes": "Category links are often in the sidebar or navigation. Use available category link names from the page elements."
+  },
+  {
+    "id": "filter-sort",
+    "intent": "filter",
+    "title": "Sort products by price or name",
+    "keywords": ["sort", "order", "price", "name", "rating", "ascending", "descending", "sort by", "arrange"],
+    "description": "Test product sorting functionality. Navigate to the products page, use the sort dropdown to change the order, and verify the products are reordered.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products navigation link",
+      "Find the Sort by dropdown or select element",
+      "Select a sort option (Sort by Price, Sort by Name)",
+      "Wait for the page to reload with sorted results",
+      "Assert that the products heading is still visible"
+    ],
+    "assertions": [
+      "The products list should still be visible after sorting",
+      "All Products or a similar heading should be visible"
+    ],
+    "notes": "Sort is usually a combobox/select element. Use the Sort by element from available page elements."
+  },
+  {
+    "id": "filter-price-range",
+    "intent": "filter",
+    "title": "Filter products by price range",
+    "keywords": ["price range", "price filter", "budget", "min price", "max price", "under", "between", "price"],
+    "description": "Test filtering products by a price range. Navigate to the products page, set a price range filter, and verify products outside that range are excluded.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products navigation link",
+      "Look for a price range filter in the sidebar (Price Range heading)",
+      "Click or interact with the price range controls",
+      "Wait for results to update",
+      "Assert that the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should remain visible",
+      "Products displayed should fall within the selected price range"
+    ],
+    "notes": "Price range filters may use sliders or input fields. Assert on the heading after filtering."
+  },
+  {
+    "id": "filter-multiple",
+    "intent": "filter",
+    "title": "Apply multiple filters together",
+    "keywords": ["multiple filters", "combined filter", "filter and sort", "refine", "several filters", "category and price"],
+    "description": "Test applying multiple filters simultaneously. Select a category filter AND a sort order, then verify the results reflect both constraints.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products navigation link",
+      "Click a category link (e.g., Laptops)",
+      "Wait for the first filter to apply",
+      "Select a sort option from the Sort by dropdown",
+      "Wait for the combined results to load",
+      "Assert that the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should be visible after applying multiple filters",
+      "Results should reflect both the category and sort selections"
+    ],
+    "notes": "Apply filters sequentially. Assert on the heading after all filters are applied."
+  },
+  {
+    "id": "filter-clear",
+    "intent": "filter",
+    "title": "Clear all active filters",
+    "keywords": ["clear filters", "reset filters", "remove filter", "clear all", "reset", "show all"],
+    "description": "Test clearing all active filters to return to the unfiltered product listing.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products navigation link",
+      "Click a category filter to activate it",
+      "Wait for filtered results",
+      "Click the Clear All or Reset Filters button",
+      "Wait for the full product list to restore",
+      "Assert that the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should be visible after clearing filters",
+      "The full product catalog should be restored"
+    ],
+    "notes": "Clear All button is usually near the active filter chips. Assert on the full products heading."
+  },
+  {
+    "id": "cart-add",
+    "intent": "cart",
+    "title": "Add product to shopping cart",
+    "keywords": ["add to cart", "add", "cart", "put in cart", "shopping cart", "buy"],
+    "description": "Test adding a product to the cart. From the products page or home page, click Add to Cart and verify the cart is updated.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link to view the products page",
+      "Click the Add to Cart button for a product",
+      "Wait for page to load (cart may update without navigation)",
+      "Click the Shopping Cart link to view the cart",
+      "Wait for cart page to load",
+      "Assert that the Shopping Cart heading is visible"
+    ],
+    "assertions": [
+      "Shopping Cart heading should be visible after navigating to cart",
+      "Cart should show at least one item"
+    ],
+    "notes": "After clicking Add to Cart, navigate to the cart page to verify. The cart link is usually in the navigation."
+  },
+  {
+    "id": "cart-remove",
+    "intent": "cart",
+    "title": "Remove item from shopping cart",
+    "keywords": ["remove", "delete", "cart", "remove from cart", "trash", "clear item"],
+    "description": "Test removing an item from the shopping cart. Navigate to the cart page and click the Remove button to delete an item.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart link to go to the cart page",
+      "Click the Remove button next to an item",
+      "Wait for the cart to update",
+      "Assert the Shopping Cart heading is still visible"
+    ],
+    "assertions": [
+      "After removing, the Shopping Cart page should still be visible",
+      "The Shopping Cart heading should remain visible"
+    ],
+    "notes": "The Remove button is typically in the cart item row. Navigate to cart first before attempting removal."
+  },
+  {
+    "id": "cart-quantity",
+    "intent": "cart",
+    "title": "Update cart item quantity",
+    "keywords": ["quantity", "update", "increase", "decrease", "amount", "cart quantity", "change quantity", "plus minus"],
+    "description": "Test updating the quantity of an item in the cart. Navigate to the cart, use the quantity controls to change the amount, and verify the cart updates.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart link",
+      "Click the + or Increase Quantity button to increase the item quantity",
+      "Wait for the cart to update",
+      "Assert the Shopping Cart heading and Order Summary are visible"
+    ],
+    "assertions": [
+      "Shopping Cart heading should remain visible",
+      "Order Summary should be visible showing updated totals"
+    ],
+    "notes": "Quantity controls are typically + and - buttons in the cart. The cart total should update automatically."
+  },
+  {
+    "id": "cart-negative-qty",
+    "intent": "cart",
+    "title": "Prevent negative quantity in cart",
+    "keywords": ["negative quantity", "minimum quantity", "quantity prevention", "decrease limit", "zero quantity", "minus button limit"],
+    "description": "Test that cart quantity cannot be set below 1 or become negative. Click the decrease button repeatedly and verify the quantity floor is enforced.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart link",
+      "If cart is empty, go to Products and click Add to Cart first",
+      "On the cart page, click the - or Decrease Quantity button multiple times",
+      "Wait after each click",
+      "Assert that the Shopping Cart heading is visible and quantity does not go negative"
+    ],
+    "assertions": [
+      "Shopping Cart heading should remain visible",
+      "The quantity should not drop below 1 — the - button should be disabled or stop at 1",
+      "Order Summary should still be visible"
+    ],
+    "notes": "Click the decrease button until it stops responding. The quantity minimum should be 1 (item stays in cart) or the item gets removed at 0."
+  },
+  {
+    "id": "cart-empty",
+    "intent": "cart",
+    "title": "Empty cart state and checkout redirect",
+    "keywords": ["empty cart", "cart empty", "no items", "checkout redirect", "empty shopping bag", "continue shopping"],
+    "description": "Test the empty cart state. Navigate to the cart when it has no items and verify the empty state is shown correctly.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart link",
+      "Assert that the Shopping Cart heading is visible",
+      "If cart shows empty state, assert the Continue Shopping or Products link is visible"
+    ],
+    "assertions": [
+      "Shopping Cart heading should be visible when on the cart page",
+      "An empty cart message or Continue Shopping prompt may be visible"
+    ],
+    "notes": "For empty cart, assert visibility of the cart page heading. The checkout button may be disabled or hidden."
+  },
+  {
+    "id": "cart-multiple",
+    "intent": "cart",
+    "title": "Cart with multiple different items",
+    "keywords": ["multiple items", "several products", "cart", "different products", "various", "multi-item cart"],
+    "description": "Test the shopping cart with multiple different items. Add multiple products and verify the cart handles them correctly.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link",
+      "Click Add to Cart for the first product",
+      "Click Add to Cart for another product",
+      "Click the Shopping Cart link",
+      "Wait for cart page to load",
+      "Assert the Shopping Cart and Order Summary headings are visible"
+    ],
+    "assertions": [
+      "Shopping Cart heading should be visible",
+      "Order Summary should be visible showing combined totals"
+    ],
+    "notes": "Add multiple items by clicking Add to Cart multiple times before navigating to the cart."
+  },
+  {
+    "id": "cart-persist-login",
+    "intent": "cart",
+    "title": "Cart persistence after login",
+    "keywords": ["cart persistence", "cart after login", "saved cart", "cart login", "persist cart", "cart session"],
+    "description": "Test that items added to the cart as a guest are preserved after the user logs in.",
+    "stepGuidance": [
+      "Navigate to the start URL without logging in",
+      "Click Products and click Add to Cart for a product",
+      "Navigate to the cart and verify the item is there",
+      "Click the Login link and sign in with testuser@example.com and TestPass123!",
+      "Navigate to the Shopping Cart after login",
+      "Assert the Shopping Cart heading is visible"
+    ],
+    "assertions": [
+      "Shopping Cart heading should be visible after logging in",
+      "Cart items should persist across the login transition"
+    ],
+    "notes": "Add items as guest first, then log in and verify cart. This tests session merging behavior."
+  },
+  {
+    "id": "checkout-shipping",
+    "intent": "checkout",
+    "title": "Checkout shipping information",
+    "keywords": ["checkout", "shipping", "address", "delivery", "full name", "city", "zip code", "state"],
+    "description": "Test filling in shipping information during checkout. Navigate to checkout, fill the shipping address form, and proceed to the next step.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart or Checkout link",
+      "Fill the Full Name field with Test User",
+      "Fill the Email field with testuser@example.com",
+      "Fill the Address field with 123 Test Street",
+      "Fill the City field with New York",
+      "Fill the State field with NY",
+      "Fill the ZIP Code field with 10001",
+      "Click the Continue button",
+      "Wait for page to load",
+      "Assert the Checkout heading is visible"
+    ],
+    "assertions": [
+      "Checkout heading should be visible throughout the process",
+      "After clicking Continue, the next step should load"
+    ],
+    "notes": "Use realistic US address data. Fill fields in the order they appear. The Continue button moves to payment."
+  },
+  {
+    "id": "checkout-payment",
+    "intent": "checkout",
+    "title": "Checkout payment information",
+    "keywords": ["checkout", "payment", "card", "credit card", "billing", "cvv", "expiry", "card number"],
+    "description": "Test filling payment details during checkout. Fill card number, expiry date, and CVV fields and verify the payment step completes.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart or Checkout link",
+      "Fill the Card Number field with 4111111111111111",
+      "Fill the Expiry Date field with 12/28",
+      "Fill the CVV field with 123",
+      "Click Place Order or Continue button",
+      "Wait for page to load",
+      "Assert the Checkout heading is visible"
+    ],
+    "assertions": [
+      "Checkout heading should remain visible",
+      "After submitting payment, an order confirmation may appear"
+    ],
+    "notes": "Use Visa test card 4111111111111111. Expiry: 12/28, CVV: 123. Place Order is the final checkout button."
+  },
+  {
+    "id": "checkout-complete",
+    "intent": "checkout",
+    "title": "Complete end-to-end checkout flow",
+    "keywords": ["checkout", "complete", "full", "end to end", "place order", "purchase", "buy", "all steps"],
+    "description": "Test the complete checkout flow from cart to order confirmation. Fill shipping, then payment details, place the order, and verify confirmation.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart link",
+      "Click Proceed to Checkout button",
+      "Fill the Full Name with Test User",
+      "Fill the Email with testuser@example.com",
+      "Fill the Address with 123 Test Street",
+      "Fill the City with New York",
+      "Fill the ZIP Code with 10001",
+      "Click Continue to move to payment",
+      "Fill the Card Number with 4111111111111111",
+      "Fill the Expiry Date with 12/28",
+      "Fill the CVV with 123",
+      "Click Place Order",
+      "Wait for confirmation page to load",
+      "Assert the Checkout heading is visible"
+    ],
+    "assertions": [
+      "Order confirmation or success heading should appear after placing the order",
+      "Checkout heading should be visible throughout the process"
+    ],
+    "notes": "This is a multi-step flow. Fill shipping first, then payment. Use test card 4111111111111111."
+  },
+  {
+    "id": "checkout-validation",
+    "intent": "checkout",
+    "title": "Checkout form validation errors",
+    "keywords": ["checkout", "validation", "error", "required field", "invalid", "form error", "missing field"],
+    "description": "Test checkout form validation. Submit the checkout form without filling required fields and verify that appropriate validation errors appear.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Shopping Cart link",
+      "Click Proceed to Checkout",
+      "Leave required fields empty and click Continue",
+      "Wait for validation errors to appear",
+      "Assert that the Checkout heading is still visible"
+    ],
+    "assertions": [
+      "Validation error messages should appear for empty required fields",
+      "The Checkout heading should still be visible — user stays on checkout page"
+    ],
+    "notes": "For validation tests, do NOT fill the required fields. Click submit immediately and assert on error messages."
+  },
+  {
+    "id": "checkout-guest",
+    "intent": "checkout",
+    "title": "Guest checkout without account",
+    "keywords": ["guest", "checkout", "no account", "without login", "anonymous", "guest checkout"],
+    "description": "Test completing checkout without being logged in as a guest. Verify the checkout flow is accessible to unauthenticated users.",
+    "stepGuidance": [
+      "Navigate to the start URL without logging in first",
+      "Click Products link and add a product to cart",
+      "Click the Shopping Cart link",
+      "Click Proceed to Checkout",
+      "Fill the Full Name with Guest User",
+      "Fill the Email with guest@example.com",
+      "Fill the Address with 456 Guest Avenue",
+      "Fill the City with Boston",
+      "Fill the ZIP Code with 02101",
+      "Click Continue",
+      "Assert the Checkout heading is visible"
+    ],
+    "assertions": [
+      "Checkout should be accessible without being logged in",
+      "Checkout heading should be visible"
+    ],
+    "notes": "Do not log in before starting this test. Guest checkout should not require an account."
+  },
+  {
+    "id": "checkout-double-submit",
+    "intent": "checkout",
+    "title": "Prevent double order submission",
+    "keywords": ["double submit", "double click", "duplicate order", "submit twice", "prevent duplicate", "order prevention"],
+    "description": "Test that clicking Place Order multiple times does not create duplicate orders. Click the button once and verify the UI prevents a second submission.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Navigate through the checkout process filling required fields",
+      "Fill the Card Number with 4111111111111111",
+      "Fill the Expiry Date with 12/28",
+      "Fill the CVV with 123",
+      "Click Place Order",
+      "Wait for page to load",
+      "Assert the Checkout heading is visible — the button should have been disabled after first click"
+    ],
+    "assertions": [
+      "Checkout heading should be visible after the order is placed",
+      "The Place Order button should be disabled or hidden after first submission"
+    ],
+    "notes": "Click Place Order once. The UI should disable the button immediately after first click to prevent double submission."
+  },
+  {
+    "id": "product-detail",
+    "intent": "product",
+    "title": "Product detail page",
+    "keywords": ["product", "detail", "item", "view product", "product page", "product info", "description"],
+    "description": "Test viewing a product detail page. Click on a product card from the listing and verify the product detail page loads with the correct information.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link to view all products",
+      "Click on a product card (e.g., MacBook Air M2) to open the detail page",
+      "Wait for the product detail page to load",
+      "Assert that a product heading or the All Products heading is visible"
+    ],
+    "assertions": [
+      "Product heading or name should be visible on the detail page",
+      "Add to Cart button should be present on the product detail page"
+    ],
+    "notes": "Click on a specific product card name from the available gridItems or cards in the page elements."
+  },
+  {
+    "id": "product-out-of-stock",
+    "intent": "product",
+    "title": "Out of stock product handling",
+    "keywords": ["out of stock", "unavailable", "sold out", "not available", "stock", "inventory", "disabled"],
+    "description": "Test how the application handles out-of-stock products. Verify that unavailable products show an appropriate indicator and prevent adding to cart.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link",
+      "Look for an out-of-stock product indicator (Out of Stock button or label)",
+      "Click on the out-of-stock product or its indicator",
+      "Wait for the page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "Out of stock products should show an indicator (disabled button, Sold Out label)",
+      "The All Products heading should remain visible"
+    ],
+    "notes": "The Out of Stock button is typically disabled. Assert on its visibility, not on adding to cart."
+  },
+  {
+    "id": "product-wishlist",
+    "intent": "product",
+    "title": "Wishlist operations",
+    "keywords": ["wishlist", "wish list", "save", "favorite", "heart", "save for later", "bookmark product"],
+    "description": "Test adding a product to the wishlist. Navigate to a product, click the wishlist button, and verify the item is saved.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link",
+      "Click on a product card to view the product detail",
+      "Look for a wishlist, heart, or Save button",
+      "Click Add to Cart as a fallback if no wishlist button is visible",
+      "Wait for page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should be visible",
+      "Wishlist button state should change (filled heart, Saved) if wishlist feature exists"
+    ],
+    "notes": "Wishlist may not exist in all apps. If unavailable, fall back to asserting the product detail page is visible."
+  },
+  {
+    "id": "product-compare",
+    "intent": "product",
+    "title": "Compare products side by side",
+    "keywords": ["compare", "comparison", "side by side", "product comparison", "versus", "compare products"],
+    "description": "Test the product comparison feature. Select multiple products for comparison and verify the comparison view is shown.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link",
+      "Click on a product card",
+      "Wait for product detail page to load",
+      "Click Add to Cart as the primary interaction",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should be visible",
+      "Products should be accessible for selection and comparison"
+    ],
+    "notes": "If the app lacks a comparison feature, test that navigating between products works correctly."
+  },
+  {
+    "id": "navigate-home",
+    "intent": "navigate",
+    "title": "Home page navigation and content",
+    "keywords": ["home", "homepage", "landing page", "main page", "home page", "welcome", "start"],
+    "description": "Test the home page loads correctly with all key sections visible. Verify the main heading, navigation, and featured content are present.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert that the main heading is visible (Welcome to TechStore or equivalent)",
+      "Verify navigation links (Products, Cart, Login) are present"
+    ],
+    "assertions": [
+      "Welcome to TechStore or main heading should be visible",
+      "Navigation links should be present and visible"
+    ],
+    "notes": "Home page tests assert on the main welcome heading. Use the first heading from available headings."
+  },
+  {
+    "id": "navigate-category",
+    "intent": "navigate",
+    "title": "Category navigation flow",
+    "keywords": ["category", "category navigation", "browse category", "category link", "product category", "laptops navigation"],
+    "description": "Test navigating to product categories via navigation links. Click a category link and verify the correct products are shown.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click a category link (Laptops, Smartphones, Audio, Tablets, or Gaming)",
+      "Wait for the category products to load",
+      "Assert that the All Products heading or a category-specific heading is visible"
+    ],
+    "assertions": [
+      "All Products or category heading should be visible after navigation",
+      "Products matching the selected category should be displayed"
+    ],
+    "notes": "Category links are usually in the navigation sidebar or top nav. Use link names from available page elements."
+  },
+  {
+    "id": "navigate-basic",
+    "intent": "navigate",
+    "title": "Basic page navigation",
+    "keywords": ["navigate", "navigation", "go to", "visit", "page", "link", "menu", "navbar", "routing"],
+    "description": "Test navigation between main pages of the application. Click navigation links and verify the correct pages load.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for the page to load",
+      "Assert the main heading is visible (Welcome to TechStore or similar)"
+    ],
+    "assertions": [
+      "The main page heading should be visible after navigation",
+      "Navigation links (Products, Cart, Login) should be visible in the header"
+    ],
+    "notes": "For navigate tests, assert visibility of the page heading after navigation."
+  },
+  {
+    "id": "navigate-404",
+    "intent": "navigate",
+    "title": "Invalid route / 404 error handling",
+    "keywords": ["404", "not found", "invalid route", "error page", "missing page", "broken link", "page not found"],
+    "description": "Test how the application handles navigation to an invalid URL. Verify that a 404 or not-found page is shown.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert the main page heading is visible (the app handles the route gracefully)"
+    ],
+    "assertions": [
+      "The application should show either a 404 page or redirect to the homepage",
+      "The main heading should be visible"
+    ],
+    "notes": "For 404 tests, assert what the user sees after the invalid navigation — an error page or a homepage redirect."
+  },
+  {
+    "id": "navigate-pagination",
+    "intent": "navigate",
+    "title": "Pagination through product pages",
+    "keywords": ["pagination", "page 2", "next page", "previous page", "page numbers", "paging", "load more"],
+    "description": "Test navigating through multiple pages of product listings using pagination controls.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products navigation link",
+      "Wait for the products page to load",
+      "Click the page 2 button or the next page pagination control",
+      "Wait for the next page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should remain visible on page 2",
+      "Different products should be shown on the second page"
+    ],
+    "notes": "Pagination buttons are labeled with page numbers (1, 2, ...) or Next/Previous. Use the number buttons from available page elements."
+  },
+  {
+    "id": "account-order-history",
+    "intent": "auth",
+    "title": "View order history",
+    "keywords": ["order history", "past orders", "my orders", "order list", "previous orders", "purchase history"],
+    "description": "Test viewing the user's order history. Log in, navigate to the account section, and verify past orders are displayed.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with testuser@example.com and TestPass123!",
+      "Click the My Account or Orders link",
+      "Wait for the order history page to load",
+      "Assert that the Order History or My Account heading is visible"
+    ],
+    "assertions": [
+      "Order History or My Account heading should be visible",
+      "Past orders (or an empty state) should be shown"
+    ],
+    "notes": "Order history requires authentication. Assert on the Order History heading after navigation."
+  },
+  {
+    "id": "account-navigation",
+    "intent": "navigate",
+    "title": "Account section navigation",
+    "keywords": ["account", "my account", "account navigation", "profile", "orders", "settings", "account menu"],
+    "description": "Test navigating through the account section including profile, orders, and settings.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with testuser@example.com and TestPass123!",
+      "Click the My Account link",
+      "Wait for the account page to load",
+      "Assert that the My Account heading is visible"
+    ],
+    "assertions": [
+      "My Account heading should be visible after navigating to the account section",
+      "Account sub-sections (Orders, Profile, Settings) should be accessible"
+    ],
+    "notes": "Account navigation requires authentication. Assert on the My Account heading."
+  },
+  {
+    "id": "admin-login",
+    "intent": "auth",
+    "title": "Admin dashboard login and access",
+    "keywords": ["admin", "dashboard", "admin login", "admin access", "backend", "admin panel", "administrator"],
+    "description": "Test admin user login and access to the admin dashboard. Log in with admin credentials and verify access to the Admin Dashboard.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Login link",
+      "Fill the email field with admin@example.com",
+      "Fill the password field with AdminPass123!",
+      "Click the Sign In button",
+      "Wait for page to load",
+      "Assert the Admin Dashboard heading is visible"
+    ],
+    "assertions": [
+      "Admin Dashboard heading should be visible after admin login",
+      "Admin-specific controls (Add Product, Orders management) should be accessible"
+    ],
+    "notes": "Use admin@example.com and AdminPass123! for admin credentials. The Admin Dashboard heading should appear after login."
+  },
+  {
+    "id": "admin-products",
+    "intent": "filter",
+    "title": "Admin product management",
+    "keywords": ["admin", "product management", "add product", "edit product", "delete product", "crud", "manage products"],
+    "description": "Test admin product management features. Access the admin dashboard and test adding, editing, or deleting a product.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Login link and sign in with admin credentials",
+      "Navigate to the Admin Dashboard",
+      "Click the Add Product button",
+      "Wait for the form to load",
+      "Assert the Admin Dashboard heading is visible"
+    ],
+    "assertions": [
+      "Admin Dashboard heading should be visible",
+      "Add Product button should be present in the admin interface"
+    ],
+    "notes": "Admin product management requires admin login first. Assert on Admin Dashboard heading."
+  },
+  {
+    "id": "admin-add-product",
+    "intent": "form",
+    "title": "Admin add new product",
+    "keywords": ["add product", "new product", "create product", "product form", "admin add", "product name", "product price"],
+    "description": "Test the admin form for adding a new product. Fill in product details and submit the add product form.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with admin credentials (admin@example.com / AdminPass123!)",
+      "Navigate to the Admin Dashboard",
+      "Click the Add Product button",
+      "Fill the product name field with Test Product",
+      "Fill the product price field with 99.99",
+      "Click the Save or Submit button",
+      "Wait for page to load",
+      "Assert the Admin Dashboard heading is visible"
+    ],
+    "assertions": [
+      "Admin Dashboard heading should be visible after adding the product",
+      "A success message or the new product may appear in the product list"
+    ],
+    "notes": "Admin add product requires admin authentication. Fill product name and price at minimum."
+  },
+  {
+    "id": "admin-orders",
+    "intent": "navigate",
+    "title": "Admin order management",
+    "keywords": ["admin", "orders", "order management", "manage orders", "order list", "fulfillment", "admin orders"],
+    "description": "Test admin order management. Navigate to the admin area and verify orders can be viewed and managed.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with admin credentials",
+      "Navigate to the Admin Dashboard",
+      "Assert the Admin Dashboard heading is visible"
+    ],
+    "assertions": [
+      "Admin Dashboard heading should be visible",
+      "Order management section should be accessible from the dashboard"
+    ],
+    "notes": "Admin order management requires admin authentication. Assert on the Admin Dashboard heading."
+  },
+  {
+    "id": "ui-responsive-navbar",
+    "intent": "navigate",
+    "title": "Responsive navbar and mobile menu",
+    "keywords": ["responsive", "navbar", "mobile menu", "hamburger", "responsive navigation", "mobile navbar", "responsive header"],
+    "description": "Test the responsive navigation bar. Verify that navigation links are visible and functional across different viewport sizes.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert that the main navigation links are visible (Products, Shopping Cart, Login)",
+      "Click the Products navigation link",
+      "Wait for the products page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "Navigation links should be visible in the header",
+      "All Products heading should appear after clicking the Products link"
+    ],
+    "notes": "For responsive navbar tests, assert on the visibility of navigation links and their functionality."
+  },
+  {
+    "id": "ui-toast",
+    "intent": "cart",
+    "title": "Toast notification system",
+    "keywords": ["toast", "notification", "alert", "message", "feedback", "success message", "snackbar", "notification system"],
+    "description": "Test the toast notification system. Trigger an action that shows a toast notification and verify the notification appears.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link",
+      "Click the Add to Cart button for a product",
+      "Wait for the toast notification to appear",
+      "Assert the Shopping Cart heading or a confirmation is visible"
+    ],
+    "assertions": [
+      "A toast notification or success message should appear after the action",
+      "The page should show confirmation of the action (Shopping Cart heading or item count update)"
+    ],
+    "notes": "Toast notifications are transient. Assert on the result of the action rather than the toast itself."
+  },
+  {
+    "id": "ui-modal",
+    "intent": "product",
+    "title": "Modal dialog functionality",
+    "keywords": ["modal", "dialog", "popup", "overlay", "close modal", "dialog box", "lightbox"],
+    "description": "Test modal dialog behavior. Trigger a modal to open, interact with it, and verify it can be closed.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link to view products",
+      "Click on a product card to open detail or modal",
+      "Wait for the detail page or modal to load",
+      "Assert the All Products heading or a product heading is visible"
+    ],
+    "assertions": [
+      "The product detail content should be visible after clicking a product",
+      "All Products or product name heading should be visible"
+    ],
+    "notes": "Modals may open on product click. If the app navigates instead, assert on the page heading."
+  },
+  {
+    "id": "ui-loading-states",
+    "intent": "navigate",
+    "title": "Loading states and spinners",
+    "keywords": ["loading", "spinner", "skeleton", "loading state", "loading indicator", "progress", "wait"],
+    "description": "Test that loading states appear correctly during page transitions and data fetching. Verify that pages load to their completed state.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load completely",
+      "Assert that the main heading is visible (Welcome to TechStore)",
+      "Click the Products link",
+      "Wait for the products page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "Pages should fully load without stuck loading spinners",
+      "Main content headings should become visible after navigation"
+    ],
+    "notes": "Loading states should resolve. The waitForLoad step handles page transitions. Assert on the final loaded state heading."
+  },
+  {
+    "id": "ui-lazy-loading",
+    "intent": "navigate",
+    "title": "Image lazy loading",
+    "keywords": ["lazy loading", "image loading", "lazy images", "deferred loading", "image performance", "progressive loading"],
+    "description": "Test that images load correctly, including lazily-loaded images that appear when scrolling into view.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert the main heading is visible (Welcome to TechStore)",
+      "Click the Products link",
+      "Wait for the products page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "All Products heading should be visible after navigation",
+      "Product images should be visible when the page loads"
+    ],
+    "notes": "For lazy loading tests, assert on page headings and product visibility. The browser handles lazy loading automatically."
+  },
+  {
+    "id": "perf-page-load",
+    "intent": "navigate",
+    "title": "Page load time performance",
+    "keywords": ["performance", "page load", "load time", "speed", "fast", "response time", "performance testing"],
+    "description": "Test page load performance. Navigate to key pages and verify they load within acceptable time by asserting on the presence of page headings.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert the main heading is visible (Welcome to TechStore)",
+      "Click the Products link",
+      "Wait for the products page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "Welcome to TechStore heading should be visible on the homepage",
+      "All Products heading should be visible on the products page"
+    ],
+    "notes": "For performance tests, use waitForLoad to gate assertions. If the page heading is visible, the page loaded successfully."
+  },
+  {
+    "id": "a11y-basic",
+    "intent": "navigate",
+    "title": "Accessibility verification",
+    "keywords": ["accessibility", "a11y", "aria", "screen reader", "keyboard", "wcag", "accessible", "assistive technology"],
+    "description": "Test basic accessibility of the application. Verify that key page elements have accessible names and that navigation is possible.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert the main heading is visible (Welcome to TechStore)",
+      "Click the Products navigation link",
+      "Wait for page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "Headings should be present and visible on every page",
+      "Navigation links should be present and clickable",
+      "Form fields should have accessible names"
+    ],
+    "notes": "Accessibility tests use standard navigation patterns. Headings, links, and buttons should all have visible and accessible names."
+  },
+  {
+    "id": "error-api",
+    "intent": "navigate",
+    "title": "API error handling",
+    "keywords": ["api error", "network error", "server error", "error handling", "500", "error page", "fetch error", "api failure"],
+    "description": "Test how the application handles API errors. Verify that error states are communicated gracefully to the user.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert the main heading is visible (Welcome to TechStore)",
+      "Click the Products link",
+      "Wait for page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "The main heading should be visible — app renders without crashing",
+      "All Products heading should be visible on the products page"
+    ],
+    "notes": "For API error tests, verify the app shows a user-friendly state rather than crashing. Assert on the visible headings."
+  },
+  {
+    "id": "cross-device-sync",
+    "intent": "auth",
+    "title": "Cross-device data synchronization",
+    "keywords": ["cross device", "synchronization", "sync", "multiple devices", "consistency", "cart sync", "data sync"],
+    "description": "Test that user data (cart, account) is consistent across sessions. Log in and verify the account state is synchronized.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click Login and sign in with testuser@example.com and TestPass123!",
+      "Navigate to My Account or Shopping Cart",
+      "Wait for page to load",
+      "Assert the My Account or Shopping Cart heading is visible"
+    ],
+    "assertions": [
+      "My Account or Shopping Cart heading should be visible",
+      "Account data should be accessible and consistent after login"
+    ],
+    "notes": "Cross-device sync is tested by verifying the logged-in state and data consistency. Assert on account page headings."
+  },
+  {
+    "id": "cross-browser",
+    "intent": "navigate",
+    "title": "Multi-browser and cross-browser testing",
+    "keywords": ["cross browser", "multi browser", "browser compatibility", "chrome", "firefox", "safari", "browser testing"],
+    "description": "Test that the application works correctly across different browsers. Navigate through key flows and verify consistent behavior.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Wait for page to load",
+      "Assert the main heading is visible (Welcome to TechStore)",
+      "Click Products link",
+      "Wait for products page to load",
+      "Assert the All Products heading is visible"
+    ],
+    "assertions": [
+      "Welcome to TechStore heading should be visible on the homepage",
+      "All Products heading should be visible on the products page"
+    ],
+    "notes": "Cross-browser tests use the same navigation patterns as regular tests. Assert on standard headings and elements."
+  },
+  {
+    "id": "journey-full-shopping",
+    "intent": "checkout",
+    "title": "Full end-to-end shopping journey",
+    "keywords": ["full journey", "shopping journey", "browse to purchase", "complete flow", "end to end", "full test", "full scenario"],
+    "description": "Test the complete shopping journey from browsing to order completion. Browse products, add to cart, login, checkout, and verify order confirmation.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link and browse products",
+      "Click Add to Cart for a product",
+      "Click the Shopping Cart link",
+      "Click Proceed to Checkout",
+      "Fill the Full Name with Test User",
+      "Fill the Email with testuser@example.com",
+      "Fill the Address with 123 Test Street",
+      "Fill the City with New York",
+      "Fill the ZIP Code with 10001",
+      "Click Continue",
+      "Fill the Card Number with 4111111111111111",
+      "Fill the Expiry Date with 12/28",
+      "Fill the CVV with 123",
+      "Click Place Order",
+      "Assert the Checkout heading is visible"
+    ],
+    "assertions": [
+      "Checkout heading should be visible throughout the process",
+      "Order confirmation should appear after Place Order"
+    ],
+    "notes": "This is a full multi-step journey. Fill each section completely before moving on. Use realistic test data throughout."
+  },
+  {
+    "id": "journey-browse-purchase",
+    "intent": "checkout",
+    "title": "Browse, filter, and purchase flow",
+    "keywords": ["browse", "filter", "compare", "purchase", "browse and buy", "filter and checkout", "end to end purchase"],
+    "description": "Test the journey from browsing and filtering products through to purchase. Apply filters, select a product, and complete the purchase.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Click the Products link",
+      "Click a category link (e.g., Laptops) to filter",
+      "Wait for filtered results to load",
+      "Click Add to Cart for a product",
+      "Click the Shopping Cart link",
+      "Click Proceed to Checkout",
+      "Fill the Full Name with Test User",
+      "Fill the Email with testuser@example.com",
+      "Fill the City with New York",
+      "Fill the ZIP Code with 10001",
+      "Click Continue",
+      "Fill the Card Number with 4111111111111111",
+      "Fill the Expiry Date with 12/28",
+      "Fill the CVV with 123",
+      "Click Place Order",
+      "Assert the Checkout heading is visible"
+    ],
+    "assertions": [
+      "Checkout heading should be visible after placing the order",
+      "The flow should complete without errors"
+    ],
+    "notes": "This journey combines filtering, cart, and checkout. Complete each step before proceeding."
+  },
+  {
+    "id": "form-validation",
+    "intent": "form",
+    "title": "Form field validation",
+    "keywords": ["form", "validation", "error message", "required", "field", "submit", "validate", "input error"],
+    "description": "Test generic form validation. Submit a form with invalid or missing data and verify that validation error messages are shown.",
+    "stepGuidance": [
+      "Navigate to the start URL",
+      "Navigate to a page with a form (Login, Register, or Checkout)",
+      "Click the submit button without filling required fields",
+      "Wait for validation to trigger",
+      "Assert that the form heading is still visible — validation prevented submission"
+    ],
+    "assertions": [
+      "Validation error messages should be visible for empty required fields",
+      "The form heading should still be visible — the form was not submitted successfully"
+    ],
+    "notes": "For validation tests, submit the form empty or with invalid data. Assert on error messages and the form staying visible."
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "name": "agenticqa",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "openai": "^6.44.0"
+  },
+  "license": "MIT"
+}

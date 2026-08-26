@@ -1,0 +1,1760 @@
+{
+  "app": "apps/demo-web",
+  "templates": "TEST_TEMPLATES.md",
+  "packLoaded": true,
+  "plans": {
+    "1": {
+      "testCases": [
+        {
+          "title": "Navigate to the home page and verify the hero section displays correct...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Welcome to TechStore"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Login"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "testCases": [
+        {
+          "title": "Search for \"laptop\" in the navbar search box and verify the results pa...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Search products...",
+              "value": "laptop"
+            },
+            {
+              "action": "click",
+              "target": "Search"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "All Products - \"laptop\""
+            }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "testCases": [
+        {
+          "title": "Go to the Products page, filter by category \"Smartphones\", sort by pri...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "select",
+              "field": "Category",
+              "option": "Smartphones"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Smartphones"
+            }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "testCases": [
+        {
+          "title": "Open a product detail page (e.g., Sony WH-1000XM5 headphones). Verify ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "All Products"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Add to Cart"
+            }
+          ]
+        }
+      ]
+    },
+    "5": {
+      "testCases": [
+        {
+          "title": "From home page, click on each category card (Laptops, Smartphones, Aud...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Smartphones"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Smartphones"
+            }
+          ]
+        }
+      ]
+    },
+    "6": {
+      "testCases": [
+        {
+          "title": "Navigate to a product page (e.g., MacBook Air M2), click \"Add to Cart\"...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "testCases": [
+        {
+          "title": "Go to the cart page, find a product in the cart, increase quantity to ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "testCases": [
+        {
+          "title": "Add a product to cart, go to cart page, click remove on that item, and...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "9": {
+      "testCases": [
+        {
+          "title": "Navigate directly to /checkout with an empty cart and verify the user ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/checkout"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Your cart is empty"
+            }
+          ]
+        }
+      ]
+    },
+    "10": {
+      "testCases": [
+        {
+          "title": "Add 3 different products to cart, go to cart page, verify all 3 items ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "11": {
+      "testCases": [
+        {
+          "title": "Add a product to cart, go to checkout, fill in shipping form with name...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "testCases": [
+        {
+          "title": "Add AirPods Pro to cart, complete checkout with shipping info (Jane Sm...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "13": {
+      "testCases": [
+        {
+          "title": "On checkout shipping step, try to proceed without filling any fields. ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/checkout"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Your cart is empty"
+            }
+          ]
+        }
+      ]
+    },
+    "14": null,
+    "15": {
+      "testCases": [
+        {
+          "title": "Go to login page, enter customer@example.com and password123, click Si...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "password123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Total Orders"
+            }
+          ]
+        }
+      ]
+    },
+    "16": {
+      "testCases": [
+        {
+          "title": "Attempt login with wrong@email.com and wrongpass, click Sign In, and v...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "wronguser@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "wrongpassword123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "expectVisible",
+              "target": "Invalid email or password"
+            }
+          ]
+        }
+      ]
+    },
+    "17": {
+      "testCases": [
+        {
+          "title": "Go to register page, fill in name \"Test User\", email \"testuser@example...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/register"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Full Name",
+              "value": "Test User"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "newuser@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "TestPass123!"
+            },
+            {
+              "action": "fill",
+              "field": "Confirm Password",
+              "value": "TestPass123!"
+            },
+            {
+              "action": "check",
+              "target": "I agree to the Terms of Service and Privacy Policy"
+            },
+            {
+              "action": "click",
+              "target": "Create Account"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Total Orders"
+            }
+          ]
+        }
+      ]
+    },
+    "18": {
+      "testCases": [
+        {
+          "title": "Try registering with mismatched passwords (password: \"test123\", confir...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/register"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Full Name",
+              "value": "Test User"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "newuser@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "TestPass123"
+            },
+            {
+              "action": "fill",
+              "field": "Confirm Password",
+              "value": "Mismatch456"
+            },
+            {
+              "action": "check",
+              "target": "I agree to the Terms of Service and Privacy Policy"
+            },
+            {
+              "action": "click",
+              "target": "Create Account"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1000
+            },
+            {
+              "action": "expectVisible",
+              "target": "Passwords do not match"
+            }
+          ]
+        }
+      ]
+    },
+    "19": {
+      "testCases": [
+        {
+          "title": "Login as a user, click user menu in navbar, select Logout, and verify ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "password123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Logout"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Login"
+            }
+          ]
+        }
+      ]
+    },
+    "20": {
+      "testCases": [
+        {
+          "title": "Go to login page, click \"Forgot Password?\", enter registered email, su...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/forgot-password"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "click",
+              "target": "Send Reset Link"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "expectVisible",
+              "target": "Resend Email"
+            }
+          ]
+        }
+      ]
+    },
+    "21": {
+      "testCases": [
+        {
+          "title": "Login as customer@example.com, go to Account page, click Orders in sid...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "password123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Total Orders"
+            }
+          ]
+        }
+      ]
+    },
+    "22": {
+      "testCases": [
+        {
+          "title": "Login, go to Profile settings, change phone number to \"555-123-4567\", ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "wronguser@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "wrongpassword123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "expectVisible",
+              "target": "Invalid email or password"
+            }
+          ]
+        }
+      ]
+    },
+    "23": {
+      "testCases": [
+        {
+          "title": "From account dashboard, verify sidebar navigation shows all sections: ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "password123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Total Orders"
+            }
+          ]
+        }
+      ]
+    },
+    "24": {
+      "testCases": [
+        {
+          "title": "Login, go to Settings, change password from old to new, confirm new pa...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "password123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Logout"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Login"
+            }
+          ]
+        }
+      ]
+    },
+    "25": {
+      "testCases": [
+        {
+          "title": "Login with admin@techstore.com and admin123, navigate to /admin, and v...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "admin@techstore.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "admin123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/admin"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            }
+          ]
+        }
+      ]
+    },
+    "26": {
+      "testCases": [
+        {
+          "title": "In admin panel Products tab, verify table shows all products with colu...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "admin@techstore.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "admin123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/admin"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            }
+          ]
+        }
+      ]
+    },
+    "27": {
+      "testCases": [
+        {
+          "title": "Go to admin Orders tab, verify orders table displays columns: Order ID...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "password123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Total Orders"
+            }
+          ]
+        }
+      ]
+    },
+    "28": {
+      "testCases": [
+        {
+          "title": "As admin, go to Products tab, click \"Add Product\", fill in name \"Test ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "admin@techstore.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "admin123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/admin"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            }
+          ]
+        }
+      ]
+    },
+    "29": {
+      "testCases": [
+        {
+          "title": "Search for \"gaming\", add a gaming laptop to cart, go to cart, update q...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "30": {
+      "testCases": [
+        {
+          "title": "Navigate to Products, filter by Laptops category, sort by rating, open...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "select",
+              "field": "Category",
+              "option": "guest@test.com"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "guest@test.com"
+            }
+          ]
+        }
+      ]
+    },
+    "31": null,
+    "32": {
+      "testCases": [
+        {
+          "title": "From home page, click \"Smartphones\" category card, verify filtered pro...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Smartphones"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Smartphones"
+            }
+          ]
+        }
+      ]
+    },
+    "33": {
+      "testCases": [
+        {
+          "title": "Login, browse products, add 3 items to wishlist, go to wishlist page, ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "34": {
+      "testCases": [
+        {
+          "title": "Find a product with stock 0 (or set one to 0), verify \"Out of Stock\" b...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "35": {
+      "testCases": [
+        {
+          "title": "Navigate to /nonexistent-page and verify either 404 page shows or user...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Welcome to TechStore"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Login"
+            }
+          ]
+        }
+      ]
+    },
+    "36": {
+      "testCases": [
+        {
+          "title": "Search for \"xyz123nonexistent\" and verify \"No products found\" message ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Search products...",
+              "value": "xyz123nonexistent"
+            },
+            {
+              "action": "click",
+              "target": "Search"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "All Products - \"xyz123nonexistent\""
+            }
+          ]
+        }
+      ]
+    },
+    "37": {
+      "testCases": [
+        {
+          "title": "Add item to cart, go to cart page, try to decrease quantity below 1, a...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "38": {
+      "testCases": [
+        {
+          "title": "Login, wait for session to expire (or manually clear cookies), try to ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "customer@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "password123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/account"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Total Orders"
+            }
+          ]
+        }
+      ]
+    },
+    "39": {
+      "testCases": [
+        {
+          "title": "During checkout, click \"Place Order\" button multiple times rapidly, an...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/checkout"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Your cart is empty"
+            }
+          ]
+        }
+      ]
+    },
+    "40": {
+      "testCases": [
+        {
+          "title": "On home page, verify navbar shows all links (Home, Products, Login) on...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Welcome to TechStore"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Login"
+            }
+          ]
+        }
+      ]
+    },
+    "41": {
+      "testCases": [
+        {
+          "title": "Add 3 different products to cart from different pages, and verify each...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    },
+    "42": {
+      "testCases": [
+        {
+          "title": "On products page, click quick view on any product card, verify modal o...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "All Products"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Add to Cart"
+            }
+          ]
+        }
+      ]
+    },
+    "43": {
+      "testCases": [
+        {
+          "title": "Navigate to Products page, verify loading skeletons/spinners appear wh...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "All Products"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Add to Cart"
+            }
+          ]
+        }
+      ]
+    },
+    "44": {
+      "testCases": [
+        {
+          "title": "On registration page, try submitting with invalid email (no @), short ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "wronguser@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "wrongpassword123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "expectVisible",
+              "target": "Invalid email or password"
+            }
+          ]
+        }
+      ]
+    },
+    "45": {
+      "testCases": [
+        {
+          "title": "Go to Products page with many items, scroll down, and verify images lo...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "All Products"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Add to Cart"
+            }
+          ]
+        }
+      ]
+    },
+    "46": {
+      "testCases": [
+        {
+          "title": "Test the complete login flow (navigate to login, fill credentials, sub...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/auth/login"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "fill",
+              "field": "Email",
+              "value": "wronguser@example.com"
+            },
+            {
+              "action": "fill",
+              "field": "Password",
+              "value": "wrongpassword123"
+            },
+            {
+              "action": "click",
+              "target": "Sign In"
+            },
+            {
+              "action": "waitFor",
+              "timeout": 1500
+            },
+            {
+              "action": "expectVisible",
+              "target": "Invalid email or password"
+            }
+          ]
+        }
+      ]
+    },
+    "47": {
+      "testCases": [
+        {
+          "title": "Navigate to home page, verify all images have alt text, buttons have a...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Welcome to TechStore"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Login"
+            }
+          ]
+        }
+      ]
+    },
+    "48": {
+      "testCases": [
+        {
+          "title": "Navigate to home page and measure that it loads within 3 seconds. Chec...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Welcome to TechStore"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Products"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Login"
+            }
+          ]
+        }
+      ]
+    },
+    "49": {
+      "testCases": [
+        {
+          "title": "While on products page, simulate API failure (using network tab), and ...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "All Products"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Add to Cart"
+            }
+          ]
+        }
+      ]
+    },
+    "50": {
+      "testCases": [
+        {
+          "title": "Login on desktop, add item to cart, then login on mobile (or mobile vi...",
+          "steps": [
+            {
+              "action": "goto",
+              "url": "/products"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "click",
+              "target": "Add to Cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "goto",
+              "url": "/cart"
+            },
+            {
+              "action": "waitForLoad"
+            },
+            {
+              "action": "expectVisible",
+              "target": "Order Summary"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

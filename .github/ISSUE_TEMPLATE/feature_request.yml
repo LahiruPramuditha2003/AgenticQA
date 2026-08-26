@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an improvement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do that AgenticQA makes hard or impossible?
+    validations: { required: true }
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you have in mind
+      description: Optional — the problem matters more than the solution.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried instead

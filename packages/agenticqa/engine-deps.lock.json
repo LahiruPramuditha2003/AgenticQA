@@ -1,0 +1,19 @@
+{
+  "externals": [
+    "@playwright/mcp"
+  ],
+  "resolved": [
+    {
+      "package": "@playwright/mcp",
+      "version": "0.0.68"
+    },
+    {
+      "package": "playwright",
+      "version": "1.59.0-alpha-1771104257000"
+    },
+    {
+      "package": "playwright-core",
+      "version": "1.59.0-alpha-1771104257000"
+    }
+  ]
+}
